@@ -13,6 +13,17 @@ async def on_ready():
     print('Hali Simon')
     print('|---------------------------|')
     print()
+@client.event
+async def on_message(message):
+    c=message.author.id
+    if c==695717308286500885:
+        a=randint(0,3)
+        tomb=['Kussolj Danika','Dani kaki','senkit nem érdekel Danika']
+        channel=message.channel
+        if a=3:
+            await message.delete()
+        else:
+            await channel.send(tomb[a])
 @client.command(pass_context=True)
 async def mitigyak(ctx):
     """Segít eldönteni mit igyál."""
@@ -89,15 +100,4 @@ async def vege(ctx):
         voice.stop()
     else:
         await ctx.send('Nem vagyok csatlakozva he')
-@client.event
-async def on_message(message):
-    c=message.author.id
-    if c==695717308286500885:
-        a=randint(0,3)
-        tomb=['Kussolj Danika','Dani kaki','senkit nem érdekel Danika']
-        channel=message.channel
-        if a=3:
-            await message.delete()
-        else:
-            await channel.send(tomb[a])
 client.run(TOKEN)
