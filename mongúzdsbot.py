@@ -48,6 +48,7 @@ async def kinalat(ctx):
     for i in range (0,len(tomb)):
         if tomb[i][-4:]=='.mp3':
             await ctx.send(tomb[i][:-4])
+    print('Átnéztem a fájlokat.')
 @client.command(pass_context=True)
 async def muzsikat(ctx, *a):
     """lejátszok valami szép zenét"""
