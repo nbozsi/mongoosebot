@@ -93,10 +93,11 @@ async def vege(ctx):
 async def on_message(message):
     c=message.author.id
     if c==695717308286500885:
-        a=randint(0,5)
-        if a=5:
+        a=randint(0,3)
+        tomb=['Kussolj Danika','Dani kaki','senkit nem érdekel Danika']
+        channel=message.channel
+        if a=3:
             await message.delete()
         else:
-            channel=message.channel
-            await channel.send('Kussolj Danika')
+            await channel.send(tomb[a])
 client.run(TOKEN)
