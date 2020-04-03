@@ -89,4 +89,10 @@ async def vege(ctx):
         voice.stop()
     else:
         await ctx.send('Nem vagyok csatlakozva he')
+@client.event
+async def on_message(message):
+    c=message.author.id
+    if c==695717308286500885:
+        channel=message.channel
+        await channel.send('Kussolj Danika')
 client.run(TOKEN)
