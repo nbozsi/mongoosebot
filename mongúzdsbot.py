@@ -1,10 +1,12 @@
 import discord
+import youtube_dl
 from discord.utils import get
 from discord.ext import commands
 import random
 import os
 client= commands.Bot(command_prefix = '?')
 TOKEN='Njk1NTgwODMxNDk4MTA4OTc5.XoclgQ.zgqOsqxYqNfkI_tpF334npjMmJ8'
+player = {}
 @client.event
 async def on_ready():
     print('Bejelentkezve {0.user} néven!'.format(client))
@@ -14,7 +16,7 @@ async def on_ready():
 @client.command(pass_context=True)
 async def mitigyak(ctx):
     """Segít eldönteni mit igyál."""
-    italok=[":wine_glass:Bort:wine_glass:",":sake:Pálinkát:sake:",":beer:Sört:beers:",":heart_eyes:Kevertet:heart_eyes:",":man_gesturing_no:Lackó kannásborát ne!:man_gesturing_no:",":deer:Jégert:deer:",":sake:Tátrateát:sake:",":champagne:Pezsgőt:champagne_glass:",":whisky:Whiskyt:whisky:"]
+    italok=[":wine_glass:Bort:wine_glass:",":sake:Pálinkát:sake:",":beer:Sört:beers:",":heart_eyes:Kevertet:heart_eyes:",":man_gesturing_no:Vodkát ne:man_gesturing_no:",":deer:Jégert:deer:",":sake:Tátrateát:sake:",":champagne:Pezsgőt:champagne_glass:",":whisky:Whiskyt:whisky:"]
     await ctx.send(random.choice(italok))
 @client.command(pass_context=True)
 async def gyerebe(ctx):
@@ -43,38 +45,21 @@ async def menjinnen(ctx):
     else:
         ("Le vagyok csatlakozva he")
 @client.command(pass_context=True)
-async def kinalat(ctx):
-    tomb=os.listdir()
-    for i in range (0,len(tomb)):
-        if tomb[i][-4:]=='.mp3':
-            await ctx.send(tomb[i][:-4])
-    print('Átnéztem a fájlokat.')
-@client.command(pass_context=True)
-async def muzsikat(ctx, *a):
+async def muzsikat(ctx, url):
     """lejátszok valami szép zenét"""
     if voice and voice.is_connected():
-        if not a:
+        guild = ctx.message.guild
+        voice_client = client.voice_client_in(guild)
+        player = await voice_client.create_ytdl_player(url)
+        players[guild.id] = player
+        player.start()
+        if not url:
             await ctx.send("Nem írtál semmit he")
         else:
             if voice.is_playing():
                 voice.pause()
                 voice.stop()
-            a=''.join(a)
-            a=a.lower()
-            tomb=os.listdir()
-            szamok=[]
-            for i in range (0,len(tomb)):
-                if tomb[i][-4:]=='.mp3':
-                    szamok.append(tomb[i][:-4])
-            if len(szamok)==0:
-                await ctx.send('Nincs semmi zeném he')
-            if a=='bármit':
-                a=random.choice(szamok)
-            if a in szamok:
-                b=a+'.mp3'
-                voice.play(discord.FFmpegPCMAudio(b), after=lambda e: print('done',e))
-            else:
-                await ctx.send('Ilyen niiincs')
+
     else:
         await ctx.send('Nem vagyok csatlakozva he')
 @client.command(pass_context=True)
@@ -105,4 +90,3 @@ async def vege(ctx):
     else:
         await ctx.send('Nem vagyok csatlakozva he')
 client.run(TOKEN)
-
