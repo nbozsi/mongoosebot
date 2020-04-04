@@ -138,7 +138,7 @@ async def vege(ctx):
     if voice and voice.is_connected():
         voice.stop()
         if os.path.exists("song.mp3"):
-            os.remove("song.mp3")
+            await os.remove("song.mp3")
     else:
         await ctx.send(f'Nem vagyok csatlakozva he')
 
