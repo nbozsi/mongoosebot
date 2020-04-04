@@ -42,7 +42,7 @@ async def gyerebe(ctx):
         await voice.move_to(channel)
     else:
         voice = await channel.connect()
-    await ctx.send(f"Igenis mesterem! Csaztalkoztam a következőhöz: '{channel}' ")
+    await ctx.send(f"Csatlakoztam a következőhöz: '{channel}' ")
 @client.command(pass_context=True)
 async def menjinnen(ctx):
     channel = ctx.message.author.voice.channel
@@ -81,6 +81,25 @@ async def muzsikat(ctx, url: str):
     voice.volume = 100
     voice.is_playing()
 
-
+@client.command(pass_context=True)
+async def alljameg(ctx):
+    """megállítom a zenét"""
+    if voice and voice.is_connected():
+        if voice and voice.is_playing():
+            voice.pause()
+        else:
+            await ctx.send(f"Mit állitsak meg bazmeg")
+    else:
+        await ctx.send(f'Nem vagyok csatlakozva he')
+@client.command(pass_context=True)
+async def mehet(ctx):
+    """folytatom a zenét"""
+    if voice and voice.is_connected():
+        if voice and voice.is_playing():
+            await ctx.send("Ne legyél gizda")
+        else:
+            voice.resume()
+    else:
+        await ctx.send('Nem vagyok csatlakozva he')
 
 client.run(TOKEN)
