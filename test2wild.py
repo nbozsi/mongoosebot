@@ -1,6 +1,7 @@
 import discord
 import youtube_dl
 import os
+import random
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
@@ -20,10 +21,27 @@ async def on_ready():
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("Ilyen niiiincs!")
+@client.event
+async def on_message(message):
+    c=message.author.id
+    if c==695717308286500885:
+        a=random.randint(0,3)
+        tomb=["Kussolj Danika","Dani kaki","senkit nem érdekel Danika"]
+        channel=message.channel
+        if a==3:
+            await msg.delete()
+        else:
+            await channel.send(tomb[a])
+    await client.process_commands(message)
 @client.command()
 async def ping(ctx):
     """mutatom a pinged"""
     await ctx.send(f" A pinged: {round(client.latency * 1000)}ms")
+@client.command(pass_context=True)
+async def mitigyak(ctx):
+    """Segít eldönteni mit igyál."""
+    italok=[":wine_glass:Bort:wine_glass:",":sake:Pálinkát:sake:",":beer:Sört:beers:",":heart_eyes:Kevertet:heart_eyes:",":man_gesturing_no:Vodkát ne:man_gesturing_no:",":deer:Jégert:deer:",":sake:Tátrateát:sake:",":champagne:Pezsgőt:champagne_glass:",":whisky:Whiskyt:whisky:"]
+    await ctx.send(random.choice(italok))
 @client.command()
 async def hajrabernatom(ctx):
     """megmutatja, hogy egy 10-es skálán mennyire szar a 25-ik"""
@@ -83,12 +101,13 @@ async def muzsikat(ctx, url: str):
         if file.endswith(".mp3"):
             os.rename(file, 'song.mp3')
     voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('done',e))
-    voice.volume = 50
+    voice.volume = 100
 
 @client.command(pass_context=True)
 async def alljameg(ctx):
     """megállítom a zenét"""
-    print("Hallottam, hogy álljak meg...")
+    print('blablabla')
+    print('Alljameg hivva', voice.is_connected())
     if voice and voice.is_connected():
         if voice and voice.is_playing():
             voice.pause()
