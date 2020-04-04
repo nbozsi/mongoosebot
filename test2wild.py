@@ -20,14 +20,17 @@ async def on_ready():
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         await ctx.send("Ilyen niiiincs!")
-@client.command(brief="Check yo ping!")
+@client.command()
 async def ping(ctx):
-    await ctx.send(f" Megpingeltél, a pingem: {round(client.latency * 1000)}ms")
+    """mutatom a pinged"""
+    await ctx.send(f" A pinged: {round(client.latency * 1000)}ms")
 @client.command()
 async def hajrabernatom(ctx):
+        """megmutatja, hogy egy 10-es skálán mennyire szar a 25-ik"""
     await ctx.send("433!")
 @client.command(pass_context=True)
 async def gyerebe(ctx):
+        """feljövök a hangra"""
     channel = ctx.message.author.voice.channel
     if not channel:
         await ctx.send("Okéj, de valamiért nem megy...")
@@ -45,6 +48,7 @@ async def gyerebe(ctx):
     await ctx.send(f"Csatlakoztam a következőhöz: '{channel}' ")
 @client.command(pass_context=True)
 async def menjinnen(ctx):
+    """lemegyek a hangról"""
     channel = ctx.message.author.voice.channel
     voice = get(client.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
@@ -54,6 +58,7 @@ async def menjinnen(ctx):
         await ctx.send("Miről csatlakozzak le bazdmeg?!")
 @client.command(pass_context=True)
 async def muzsikat(ctx, url: str):
+        """lejátszok valami szép zenét"""
     #queue? make a list!
     song_there = os.path.isfile("song.mp3")
     try:
@@ -77,8 +82,8 @@ async def muzsikat(ctx, url: str):
     for file in os.listdir("./"):
         if file.endswith(".mp3"):
             os.rename(file, 'song.mp3')
-    voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('done',e))
-    voice.volume = 100
+    voice.play(discord.FFmpegPCMAudio("song.mp3")), after=lambda e: print('done',e))
+    voice.volume = 50
     voice.is_playing()
 
 @client.command(pass_context=True)
