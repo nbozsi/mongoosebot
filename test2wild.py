@@ -2,6 +2,7 @@ import discord
 import youtube_dl
 import os
 import random
+import time
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
@@ -92,7 +93,7 @@ async def muzsikat(ctx, *url):
         except Exception:
             await ctx.send("Valamit elbasztál, de csúnyán!")
             return
-        mymsg = await ctx.send("Most játszott: " + url)
+        await ctx.send("Most játszott: " + url)
         await ctx.message.delete()
         voice = get(client.voice_clients, guild=ctx.guild)
         ydl_opts = {
@@ -110,7 +111,6 @@ async def muzsikat(ctx, *url):
                 os.rename(file, 'song.mp3')
         voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('done',e))
         voice.volume = 100
-        await mymsg.delete()
 
 @client.command(pass_context=True)
 async def alljameg(ctx):
