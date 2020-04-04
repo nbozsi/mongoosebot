@@ -74,7 +74,8 @@ async def menjinnen(ctx):
     if voice and voice.is_connected():
         await voice.disconnect()
         await ctx.send("Lecsatlakoztam...")
-        await os.remove("song.mp3")
+        if os.path.exists("song.mp3"):
+            await os.remove("song.mp3")
     else:
         await ctx.send("Miről csatlakozzak le bazdmeg?!")
 @client.command(pass_context=True)
@@ -136,7 +137,8 @@ async def vege(ctx):
     voice = get(client.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
         voice.stop()
-        os.remove("song.mp3")
+        if os.path.exists("song.mp3"):
+            os.remove("song.mp3")
     else:
         await ctx.send(f'Nem vagyok csatlakozva he')
 
