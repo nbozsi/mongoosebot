@@ -69,9 +69,12 @@ async def menjinnen(ctx):
     """lemegyek a hangról"""
     channel = ctx.message.author.voice.channel
     voice = get(client.voice_clients, guild=ctx.guild)
+
+
     if voice and voice.is_connected():
         await voice.disconnect()
         await ctx.send("Lecsatlakoztam...")
+        await os.remove("song.mp3")
     else:
         await ctx.send("Miről csatlakozzak le bazdmeg?!")
 @client.command(pass_context=True)
@@ -107,7 +110,7 @@ async def muzsikat(ctx, url: str):
 async def alljameg(ctx):
     """megállítom a zenét"""
     print('blablabla')
-    print('Alljameg hivva', voice.is_connected())
+    voice = get(client.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
         if voice and voice.is_playing():
             voice.pause()
@@ -118,6 +121,7 @@ async def alljameg(ctx):
 @client.command(pass_context=True)
 async def mehet(ctx):
     """folytatom a zenét"""
+    voice = get(client.voice_clients, guild=ctx.guild)
     if voice and voice.is_connected():
         if voice and voice.is_playing():
             await ctx.send("Ne legyél gizda")
