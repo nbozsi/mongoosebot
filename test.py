@@ -85,7 +85,8 @@ async def muzsikat(self, ctx, *, song:str):
       """Lejátszik egy zenét.
       """
       state = self.get_voice_state(ctx.message.guild)
-      opts = {
+      print (' state ')
+        opts = {
           'default_search': 'auto',
           'quiet': True,
       }
