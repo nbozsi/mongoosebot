@@ -130,4 +130,14 @@ async def mehet(ctx):
     else:
         await ctx.send('Nem vagyok csatlakozva he')
 
+@client.command(pass_context=True)
+async def vege(ctx):
+    """kinyomom a számot"""
+    voice = get(client.voice_clients, guild=ctx.guild)
+    if voice and voice.is_connected():
+        voice.stop()
+        os.remove("song.mp3")
+    else:
+        await ctx.send(f'Nem vagyok csatlakozva he')
+
 client.run(TOKEN)
