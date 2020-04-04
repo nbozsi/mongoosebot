@@ -15,7 +15,7 @@ client = commands.Bot(command_prefix = '?')
 
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.idle, activity=discord.Game("another one"))
+    await client.change_presence(status=discord.Status.idle, activity=discord.Game("At your service!"))
     print("Hi Mr.Torok!")
 @client.event
 async def on_command_error(ctx, error):
@@ -35,8 +35,8 @@ async def on_message(message):
     await client.process_commands(message)
 @client.command()
 async def ping(ctx):
-    """mutatom a pinged"""
-    await ctx.send(f" A pinged: {round(client.latency * 1000)}ms")
+    """mutatom a pingem"""
+    await ctx.send(f" A pingem: {round(client.latency * 1000)}ms")
 @client.command(pass_context=True)
 async def mitigyak(ctx):
     """Segít eldönteni mit igyál."""
@@ -79,33 +79,36 @@ async def menjinnen(ctx):
     else:
         await ctx.send("Miről csatlakozzak le bazdmeg?!")
 @client.command(pass_context=True)
-async def muzsikat(ctx, url: str):
+async def muzsikat(ctx, *url):
     """lejátszok valami szép zenét"""
-    #queue? make a list!
+    url=''.join(url)
     song_there = os.path.isfile("song.mp3")
-    try:
-        if song_there:
-            os.remove("song.mp3")
-    except Exception:
-        await ctx.send("Valamit elbasztál, de csúnyán!")
-        return
-    await ctx.send("Most játszott: " + url)
-    voice = get(client.voice_clients, guild=ctx.guild)
-    ydl_opts = {
-        'format': 'bestaudio/best',
-        'postprocessors': [{
-            'key': 'FFmpegExtractAudio',
-            'preferredcodec': 'mp3',
-            'preferredquality': '192',
-        }],
-    }
-    with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
-    for file in os.listdir("./"):
-        if file.endswith(".mp3"):
-            os.rename(file, 'song.mp3')
-    voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('done',e))
-    voice.volume = 100
+    if url == '':
+        await ctx.send("Nem írtál semmit heh!")
+    else:
+        try:
+            if song_there:
+                os.remove("song.mp3")
+        except Exception:
+            await ctx.send("Valamit elbasztál, de csúnyán!")
+            return
+        await ctx.send("Most játszott: " + url)
+        voice = get(client.voice_clients, guild=ctx.guild)
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
+        with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+            ydl.download([url])
+        for file in os.listdir("./"):
+            if file.endswith(".mp3"):
+                os.rename(file, 'song.mp3')
+        voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('done',e))
+        voice.volume = 100
 
 @client.command(pass_context=True)
 async def alljameg(ctx):
@@ -135,10 +138,8 @@ async def mehet(ctx):
 async def vege(ctx):
     """kinyomom a számot"""
     voice = get(client.voice_clients, guild=ctx.guild)
-    if voice and voice.is_connected():
+    if voice and voice.is_playing():
         voice.stop()
-        if os.path.exists("song.mp3"):
-            await os.remove("song.mp3")
     else:
         await ctx.send(f'Nem vagyok csatlakozva he')
 
