@@ -26,6 +26,7 @@ async def on_message(msg):
             await msg.delete()
          else:
              await channel.send(tomb[a])
+    await bot.process_commands(message)
 
 @client.command(pass_context=True)
 async def mitigyak(ctx):
