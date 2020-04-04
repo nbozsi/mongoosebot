@@ -88,7 +88,7 @@ async def muzsikat(ctx, url: str):
 @client.command(pass_context=True)
 async def alljameg(ctx):
     """megállítom a zenét"""
-    print( Hallottam, hogy álljak meg... )
+    print("Hallottam, hogy álljak meg...")
     if voice and voice.is_connected():
         if voice and voice.is_playing():
             voice.pause()
