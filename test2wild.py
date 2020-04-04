@@ -77,7 +77,7 @@ async def muzsikat(ctx, url: str):
     for file in os.listdir("./"):
         if file.endswith(".mp3"):
             os.rename(file, 'song.mp3')
-    voice.play(discord.FFmpegPCMAudio("song.mp3"))
+    voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('done',e))
     voice.volume = 100
     voice.is_playing()
 
