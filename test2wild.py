@@ -113,7 +113,8 @@ async def muzsikat(ctx, *url):
             if file.endswith(".mp3"):
                 os.rename(file, 'song.mp3')
         voice.play(discord.FFmpegPCMAudio("song.mp3"), after=lambda e: print('done',e))
-        voice.volume = 100
+        voice.source=discord.PCMVolumeTransformer(voice.source)
+        voice.source.volume = 0.5
 
 @client.command(pass_context=True)
 async def alljameg(ctx):
