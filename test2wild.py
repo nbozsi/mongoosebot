@@ -10,7 +10,7 @@ from os import system
 from discord.ext import commands
 
 queuelist = []
-
+elozo = None
 TOKEN = 'Njk1NTgwODMxNDk4MTA4OTc5.XoclgQ.zgqOsqxYqNfkI_tpF334npjMmJ8'
 client = commands.Bot(command_prefix = '?')
 
@@ -82,6 +82,7 @@ async def menjinnen(ctx):
 @client.command(pass_context=True)
 async def muzsikat(ctx, *url):
     """lejátszok valami szép zenét"""
+    global elozo
     url=''.join(url)
     song_there = os.path.isfile("song.mp3")
     if url == '':
@@ -93,7 +94,9 @@ async def muzsikat(ctx, *url):
         except Exception:
             await ctx.send("Valamit elbasztál, de csúnyán!")
             return
-        await ctx.send("Most játszott: " + url)
+        if elozo!=None:
+            elozo.delete()
+        elozo = await ctx.send("Most játszott: " + url)
         await ctx.message.delete()
         voice = get(client.voice_clients, guild=ctx.guild)
         ydl_opts = {
