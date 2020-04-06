@@ -26,13 +26,23 @@ async def on_command_error(ctx, error):
 async def on_message(message):
     c=message.author.id
     if c==695717308286500885:
-        a=random.randint(0,3)
-        tomb=["Kussolj Danika","Dani kaki","senkit nem érdekel Danika"]
+        t=str(message.content)
         channel=message.channel
-        if a==3:
-            await msg.delete()
+        if len(t.split(' '))>2:
+            m=t[0].lower()
+            for i in range (0, len(t)):
+                if i%2==0:
+                    m+=t[i].lower()
+                else:
+                    m+=t[i].upper()
+            await ctx.send(m)
         else:
-            await channel.send(tomb[a])
+            tomb=["Kussolj Danika","Dani kaki","senkit nem érdekel"]
+            a=random.randint(0,3)
+            if a==3:
+                await message.delete()
+            else:
+                await channel.send(tomb[a])
     await client.process_commands(message)
 @client.command()
 async def ping(ctx):
