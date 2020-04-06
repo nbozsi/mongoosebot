@@ -103,6 +103,7 @@ async def muzsikat(ctx, *url):
                 os.remove("song.mp3")
         except Exception:
             await ctx.send("Valamit elbasztál, de csúnyán!")
+            await ctx.message.delete()
             return
         if elozo!=None:
             elozo.delete()
