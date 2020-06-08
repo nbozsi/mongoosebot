@@ -132,7 +132,8 @@ async def muzsikat(ctx, url: str):
         else:
             await ctx.send("Most játszott: " + url)
             voice.play(discord.FFmpegPCMAudio(a), after=sor)
-            voice.volume = 0.3
+            voice.source=discord.PCMVolumeTransformer(vc.source)
+            voice.source.volume = 0.3
 
 @client.command(pass_context=True)
 async def alljameg(ctx):
