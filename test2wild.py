@@ -53,8 +53,8 @@ async def on_message(message):
     await client.process_commands(message)
 @client.command()
 async def ping(ctx):
-    """mutatom a pinged"""
-    await ctx.send(f" A pinged: {round(client.latency * 1000)}ms")
+    """mutatom a pingem"""
+    await ctx.send(f" A pingem: {round(client.latency * 1000)}ms")
 @client.command(pass_context=True)
 async def mitigyak(ctx):
     """Segít eldönteni mit igyál."""
