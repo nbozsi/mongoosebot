@@ -17,7 +17,7 @@ a=1
 b=1
 @client.event
 async def on_ready():
-    await client.change_presence(status=discord.Status.idle, activity=discord.Game("another one"))
+    await client.change_presence(status=discord.Status.online, activity=discord.Game("At your service!"))
     print(" /$$   /$$ /$$       /$$      /$$                 /$$$$$$$$ /$ /$               /$ /$   /$$      ")
     print("| $$  | $$|__/      | $$$    /$$$                |__  $$__/|_/|_/              |_/|_/  | $$      ")
     print("| $$  | $$ /$$      | $$$$  /$$$$  /$$$$$$          | $$   /$$$$$$   /$$$$$$   /$$$$$$ | $$   /$$")
