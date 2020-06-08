@@ -11,7 +11,7 @@ from discord.ext import commands
 queuelist = []
 
 TOKEN = 'Njk1NTgwODMxNDk4MTA4OTc5.XoclgQ.zgqOsqxYqNfkI_tpF334npjMmJ8'
-client = commands.Bot(command_prefix = '!')
+client = commands.Bot(command_prefix = '.')
 queue=[]
 a=1
 b=1
