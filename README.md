@@ -1,2 +1,4 @@
 # mongoosebot
-mongúzbot
+Szerény örsi szerverünk hűséges botja.
+Funkciók: -mitigyak
+          -zenelejátszás youtuberól
