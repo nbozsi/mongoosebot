@@ -58,7 +58,7 @@ async def ping(ctx):
 @client.command(pass_context=True)
 async def mitigyak(ctx):
     """Segít eldönteni mit igyál."""
-    italok=[":wine_glass:Bort:wine_glass:",":sake:Pálinkát:sake:",":beer:Sört:beers:",":heart_eyes:Kevertet:heart_eyes:",":man_gesturing_no:Vodkát ne:man_gesturing_no:",":deer:Jégert:deer:",":sake:Tátrateát:sake:",":champagne:Pezsgőt:champagne_glass:",":whisky:Whiskyt:whisky:",":MGregSip:Kólát:MGregSip:"]
+    italok=[":wine_glass:Bort:wine_glass:",":sake:Pálinkát:sake:",":beer:Sört:beers:",":heart_eyes:Kevertet:heart_eyes:",":man_gesturing_no:Vodkát ne:man_gesturing_no:",":deer:Jégert:deer:",":sake:Tátrateát:sake:",":champagne:Pezsgőt:champagne_glass:",":whisky:Whiskyt:whisky:","<:MGregSip:719237100230148137>"]
     await ctx.send(random.choice(italok))
 @client.command()
 async def hajrabernatom(ctx):
