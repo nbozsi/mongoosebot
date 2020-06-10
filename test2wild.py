@@ -9,8 +9,8 @@ from os import system
 from discord.ext import commands
 
 queuelist = []
-
-TOKEN = ''
+with open('token.txt','r') as f:
+    TOKEN = f.readline().rstrip()
 client = commands.Bot(command_prefix = '.')
 queue=[]
 a=1
