@@ -128,8 +128,10 @@ async def muzsikat(ctx, url: str):
                 if file.endswith(a):
                     os.rename(file, file[-15:])
         if voice.is_playing():
+            await ctx.message.delete()
             await ctx.send("Hozzáadtam a lejátszási sorhoz.")
         else:
+            await ctx.message.delete()
             await ctx.send("Most játszott: " + url)
             voice.play(discord.FFmpegPCMAudio(a), after=sor)
             voice.source=discord.PCMVolumeTransformer(voice.source)
