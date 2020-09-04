@@ -31,8 +31,8 @@ def sor(a):
     os.remove(queue[0]+".mp3")
     queue.pop(0)
     print(queue)
-    print("Elindítottam a kövi számot")
     if len(queue)>0:
+        print("Elindítottam a kövi számot")
         y=queue[0]+'.mp3'
         voice.play(discord.FFmpegPCMAudio(y), after=sor)
 @client.event
