@@ -35,6 +35,8 @@ def sor(a):
         print("Elindítottam a kövi számot")
         y=queue[0]+'.mp3'
         voice.play(discord.FFmpegPCMAudio(y), after=sor)
+        voice.source=discord.PCMVolumeTransformer(voice.source)
+        voice.source.volume = 0.1
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
