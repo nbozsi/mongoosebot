@@ -111,8 +111,6 @@ async def muzsikat(ctx, url: str):
                 url=url.split('&')[0]
             if "youtu.be" in url:
                 url="https://www.youtube.com/watch?v="+url[-11:]
-            queue.append(url[-11:])
-            print(queue)
             ydl_opts = {
                 'format': 'bestaudio/best',
                 'postprocessors': [{
@@ -127,6 +125,8 @@ async def muzsikat(ctx, url: str):
             for file in os.listdir("./"):
                 if file.endswith(a):
                     os.rename(file, file[-15:])
+            queue.append(url[-11:])
+            print(queue)
         if voice.is_playing():
             await ctx.message.delete()
             await ctx.send("Hozzáadtam a lejátszási sorhoz.")
