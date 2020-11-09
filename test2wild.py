@@ -28,12 +28,12 @@ async def on_ready():
     print("|__/  |__/|__/      |__/     |__/|__/|__/           |__/  \______/ |__/       \______/ |__/  \__/")
     print()
 def sor(a):
-    os.remove(queue[0]+".mp3")
+    os.remove(queue[0])
     queue.pop(0)
     print(queue)
     if len(queue)>0:
         print("Elindítottam a kövi számot")
-        y=queue[0]+'.mp3'
+        y=queue[0]
         voice.play(discord.FFmpegPCMAudio(y), after=sor)
         voice.source=discord.PCMVolumeTransformer(voice.source)
         voice.source.volume = 0.1
@@ -123,11 +123,9 @@ async def muzsikat(ctx, url: str):
             }
             with youtube_dl.YoutubeDL(ydl_opts) as ydl:
                 ydl.download([url])
-            a=url[-11:]+".mp3"
             for file in os.listdir("./"):
-                if file.endswith(a):
-                    os.rename(file, file[-15:])
-            queue.append(url[-11:])
+                if file.endswith(".mp3") and file not in queue:
+                    queue.append(file)
             print(queue)
         if voice.is_playing():
             await ctx.message.delete()
