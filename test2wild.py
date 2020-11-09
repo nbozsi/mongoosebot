@@ -133,7 +133,7 @@ async def muzsikat(ctx, url: str):
         else:
             await ctx.message.delete()
             await ctx.send("Most játszott: " + url)
-            voice.play(discord.FFmpegPCMAudio(a), after=sor)
+            voice.play(discord.FFmpegPCMAudio(queue[0]), after=sor)
             voice.source=discord.PCMVolumeTransformer(voice.source)
             voice.source.volume = 0.1
 
