@@ -171,5 +171,16 @@ async def tekerdat(ctx):
             await os.remove("song.mp3")
     else:
         await ctx.send(f'Nem vagyok csatlakozva he')
-
+@client.command(pass_context=True)
+async def lejatszandok(ctx):
+    """milyen számok vannak a lejátszasi soron"""
+    await ctx.send(str(queue))
+@client.command(pass_context=True)
+async def fajlok(ctx):
+    """fajlok a koddal egy mappában"""
+    t=[]
+    for file in os.listdir("./"):
+        if file.endswith(".mp3") and file not in queue:
+            t.append(file)
+    await ctx.send(str(t))
 client.run(TOKEN)
